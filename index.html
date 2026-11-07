@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>wordle.hr · Analiza</title>
+<style>
+:root{--bg:#fafaf7;--card:#fff;--ink:#1c1c1a;--mute:#6b6b66;--line:#e2e2dc;--g:#6aaa64;--y:#c9b458;--x:#787c7e;--acc:#2f6fed;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121212;--card:#1c1c1c;--ink:#ececea;--mute:#9a9a94;--line:#333;--g:#538d4e;--y:#b59f3b;--x:#3a3a3c;--acc:#6b9bff;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121212;--card:#1c1c1c;--ink:#ececea;--mute:#9a9a94;--line:#333;--g:#538d4e;--y:#b59f3b;--x:#3a3a3c;--acc:#6b9bff;color-scheme:dark}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:980px;margin:0 auto;padding:16px}
+h1{font-size:20px;margin:0 0 2px}h2{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);margin:0 0 8px}
+.sub{color:var(--mute);margin:0 0 14px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;min-width:0}
+.row{display:flex;gap:6px;margin-bottom:6px;align-items:center}
+.t{width:46px;height:46px;border-radius:6px;display:grid;place-items:center;font-weight:700;font-size:22px;text-transform:uppercase;color:#fff;cursor:pointer;user-select:none;border:0;padding:0}
+.t.c0{background:var(--x)}.t.c1{background:var(--y)}.t.c2{background:var(--g)}
+.tag{font-size:12px;font-weight:600;padding:2px 8px;border-radius:99px;border:1px solid var(--line);margin-left:6px;white-space:nowrap}
+.in{display:flex;gap:8px;margin-top:10px}
+input,textarea,button{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px}
+input{flex:1;min-width:0;text-transform:lowercase;letter-spacing:.15em}
+button{cursor:pointer}button.p{background:var(--acc);color:#fff;border-color:var(--acc)}
+.bar{height:12px;border-radius:99px;background:var(--line);overflow:hidden;margin:6px 0}
+.bar i{display:block;height:100%;background:var(--g);transition:width .3s}
+.sg{display:grid;grid-template-columns:auto 1fr auto;gap:4px 10px;align-items:center}
+.sg b{font-size:16px;letter-spacing:.08em;cursor:pointer}
+.sg .m{height:6px;background:var(--acc);border-radius:9px}
+.mute{color:var(--mute);font-size:13px}
+.chips{display:flex;flex-wrap:wrap;gap:4px;max-height:130px;overflow:auto}
+.chips span{background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:1px 7px;font-size:13px}
+.rv{width:100%;border-collapse:collapse;font-size:14px;display:block;overflow-x:auto}
+.rv td,.rv th{padding:4px 8px;text-align:left;white-space:nowrap;border-bottom:1px solid var(--line)}
+details{margin-top:14px}textarea{width:100%;height:110px}
+.t.d{font-size:15px}input[type=file]{letter-spacing:0;text-transform:none}
+select{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;max-width:100%;margin-bottom:8px}
+</style>
+</head>
+<body>
+<main>
+<h1>wordle.hr · Analiza</h1>
+<p class="sub">Motor za hrvatski Wordle: unesi svoje pokušaje, označi boje pločica i motor računa najbolji sljedeći potez, kao u šahu.</p>
+<div class="grid">
+<section class="card">
+<h2>Partija</h2>
+<div id="board"></div>
+<div class="in"><input id="w" maxlength="10" placeholder="riječ od 5 slova" autocomplete="off"><button class="p" id="add">Dodaj</button></div>
+<div class="in"><button id="undo">Poništi</button><button id="reset">Nova partija</button><button id="diag">Dijagnostika</button></div>
+<p class="mute" id="msg"></p><textarea id="dgo" style="display:none;height:150px" readonly></textarea><p class="mute">Klikni pločicu za promjenu boje: siva, žuta, zelena. lj, nj i dž su jedna pločica, kao na wordle.hr.</p>
+</section>
+<section class="card">
+<h2>Motor</h2>
+<div id="eval"></div>
+<div class="bar"><i id="fill" style="width:0"></i></div>
+<div id="sug" class="sg"></div>
+</section>
+</div>
+<section class="card" style="margin-top:14px"><h2>Preostale riječi</h2><div id="cands" class="chips"></div></section>
+<section class="card" style="margin-top:14px"><h2>Pregled partije</h2><div id="review"></div></section>
+<details class="card"><summary>Popis riječi (<span id="cnt"></span>)</summary>
+<p class="mute">Spremi datoteku <code>main.….js</code> s wordle.hr i odaberi je ovdje. Prvi popis u njoj uzima se kao rješenja, drugi kao dodatne dopuštene riječi. Datoteka se čita samo u tvom pregledniku i ne šalje se nikamo. Izvučeni popisi spremaju se u preglednik, pa ih ne moraš ponovno učitavati.</p>
+<div class="in"><input type="file" id="f" accept=".js,.txt"></div><p class="mute" id="imsg">Još nema učitanog popisa. Odaberi datoteku main.….js.</p><select id="sel" style="display:none"></select>
+<p class="mute">Ili zalijepi vlastiti popis rješenja:</p>
+<textarea id="list"></textarea><div class="in"><button class="p" id="apply">Primijeni popis</button><button id="def">Obriši popise</button></div></details>
+</main>
+<script>
+const AL='abcčćdđǆefghijklǉmnǌoprsštuvzž',RX=new RegExp('^['+AL+']{5}$');
+const ix={};[...AL].forEach((c,i)=>ix[c]=i+1);
+const dg=t=>t.toLowerCase().normalize('NFC').replace(/dž/g,'ǆ').replace(/lj/g,'ǉ').replace(/nj/g,'ǌ');
+const sh=c=>c==='ǆ'?'dž':c==='ǉ'?'lj':c==='ǌ'?'nj':c,dsp=w=>[...w].map(sh).join('');
+const $=id=>document.getElementById(id),LS='wordlehr.lists2';
+let nA=0,P=[],PE=[],pidx=new Map(),rows=[],cache=new Map(),T=0;
+const CN=new Uint8Array(32),R=new Uint8Array(5),M=new Uint16Array(243);
+const clean=(a,raw)=>[...new Set(a.map(w=>raw?String(w).toLowerCase().normalize('NFC'):dg(w)).filter(w=>RX.test(w)))];
+function setLists(A,E,save){const s=new Set(A);P=A.concat(E.filter(w=>!s.has(w)));nA=A.length;PE=P.map(w=>Uint8Array.from([...w],c=>ix[c]));pidx=new Map(P.map((w,i)=>[w,i]));cache.clear();rows=[];
+ $('cnt').textContent=nA+' rješenja · '+P.length+' dopuštenih riječi';
+ if(save)try{localStorage.setItem(LS,JSON.stringify({a:A,e:E}))}catch(x){}
+ render()}
+function pcode(g,a){CN.fill(0);for(let i=0;i<5;i++){R[i]=g[i]===a[i]?2:0;if(!R[i])CN[a[i]]++}for(let i=0;i<5;i++)if(!R[i]&&CN[g[i]]>0){R[i]=1;CN[g[i]]--}return R[0]+3*R[1]+9*R[2]+27*R[3]+81*R[4]}
+const fbc=f=>f[0]+3*f[1]+9*f[2]+27*f[3]+81*f[4];
+function ent(g,C){M.fill(0);const G=PE[g];for(const a of C)M[pcode(G,PE[a])]++;let h=0;const n=C.length;for(const v of M)if(v){const p=v/n;h-=p*Math.log2(p)}return h}
+function best(C,key){let r=cache.get(key);if(r)return r;const s=new Set(C),L=[];for(let g=0;g<P.length;g++){const e=ent(g,C),c=g<nA&&s.has(g)?1:0;L.push([e+c/C.length,c,g,e])}L.sort((x,y)=>y[0]-x[0]||y[1]-x[1]);r={top:L.slice(0,8),bs:L[0][0]};cache.set(key,r);return r}
+function label(r){return r>=.97?['Najbolji','var(--g)']:r>=.85?['Odličan','var(--g)']:r>=.7?['Dobar','var(--acc)']:r>=.5?['Nepreciznost','var(--y)']:['Greška','#d9534f']}
+function render(){$('eval').textContent='Računam…';clearTimeout(T);T=setTimeout(draw,20)}
+function draw(){
+ const sets=[Array.from({length:nA},(_,i)=>i)],keys=['k|'];
+ rows.forEach(r=>{const c=fbc(r.fb),G=PE[r.i],p=sets[sets.length-1];sets.push(p.filter(a=>pcode(G,PE[a])===c));keys.push(keys[keys.length-1]+r.w+c+'|')});
+ const C=sets[sets.length-1],N=C.length;
+ $('board').innerHTML=rows.map((r,ri)=>`<div class="row">${[...r.w].map((ch,i)=>`<button class="t c${r.fb[i]}${'ǆǉǌ'.includes(ch)?' d':''}" data-r="${ri}" data-i="${i}">${sh(ch)}</button>`).join('')}<span id="tg${ri}"></span></div>`).join('')||'<p class="mute">Još nema pokušaja. Upiši prvu riječ.</p>';
+ const bits=N>0?Math.log2(N):0;
+ $('eval').innerHTML=P.length===0?'<b>Nema učitanih riječi.</b> <span class="mute">Učitaj datoteku main.….js u odjeljku Popis riječi.</span>':N===0?noc(sets):N===1?`<b>Rješenje: ${dsp(P[C[0]])}</b>`:`<b>${N}</b> preostalih riječi · ${bits.toFixed(1)} bita neizvjesnosti`;
+ $('fill').style.width=(N<=1?(N?100:0):Math.max(2,(1-bits/Math.log2(nA))*100))+'%';
+ const top=N>1?best(C,keys[keys.length-1]).top:[],mx=top.length?Math.max(...top.map(s=>s[3]))||1:1;
+ $('sug').innerHTML=top.map(s=>`<b data-w="${P[s[2]]}">${dsp(P[s[2]])}</b><div class="m" style="width:${Math.max(4,s[3]/mx*100)}%"></div><span class="mute">${s[3].toFixed(2)} bita${s[1]?' · moguće rješenje':''}</span>`).join('')||'<span class="mute">Nema prijedloga.</span>';
+ $('cands').innerHTML=C.slice(0,150).map(i=>`<span>${dsp(P[i])}</span>`).join('')+(N>150?`<span>… +${N-150}</span>`:'');
+ let acc=[],h='';
+ rows.forEach((r,i)=>{const S=sets[i],nx=sets[i+1].length;let e='-',bb='-',q,got=NaN;
+  if(S.length===0){acc.push(1);h+=`<tr><td>${i+1}</td><td>${dsp(r.w)}</td><td>0</td><td>-</td><td>-</td><td>-</td></tr>`;return}
+  const inS=S.includes(r.i);
+  if(S.length===1){q=inS?1:0}else{const b=best(S,keys[i]),sc=ent(r.i,S)+(inS?1/S.length:0);q=b.bs>0?Math.min(1,sc/b.bs):1;e=sc.toFixed(2);bb=b.bs.toFixed(2);got=nx?Math.log2(S.length/nx):NaN}
+  const L=label(q);acc.push(q);
+  h+=`<tr><td>${i+1}</td><td>${dsp(r.w)}</td><td>${S.length}→${nx}</td><td>${e} / ${bb}</td><td>${isNaN(got)?'-':got.toFixed(2)}</td><td style="color:${L[1]};font-weight:600">${S.length===1&&!inS?'Greška (rješenje: '+dsp(P[S[0]])+')':L[0]}</td></tr>`;
+  const t=$('tg'+i);if(t){t.className='tag';t.style.color=L[1];t.textContent=L[0]}});
+ $('review').innerHTML=rows.length?`<p>Točnost: <b>${Math.round(acc.reduce((a,b)=>a+b,0)/acc.length*100)}%</b> <span class="mute">(bitovi informacije pokušaja, uz mali bonus ako je moguće rješenje, u odnosu na najbolji potez; kad ostane jedan kandidat, jedini dobar potez je pogoditi ga)</span></p><table class="rv"><tr><th>#</th><th>Riječ</th><th>Kandidati</th><th>Očekivano / najbolje</th><th>Dobiveno</th><th>Ocjena</th></tr>${h}</table>`:'<span class="mute">Pregled se pojavljuje nakon prvog pokušaja.</span>'}
+function add(){const w=dg($('w').value.trim());if(!RX.test(w)){$('w').focus();return}if(!pidx.has(w)){$('msg').textContent=P.length?'Nije na popisu riječi':'Prvo učitaj popis riječi iz datoteke main.….js';return}$('msg').textContent='';rows.push({w,i:pidx.get(w),fb:[0,0,0,0,0]});$('w').value='';render()}
+$('add').onclick=add;$('w').onkeydown=e=>{if(e.key==='Enter')add()};
+$('undo').onclick=()=>{rows.pop();render()};$('reset').onclick=()=>{rows=[];render()};
+$('board').onclick=e=>{const t=e.target.closest('.t');if(!t)return;const r=rows[+t.dataset.r],i=+t.dataset.i;r.fb[i]=(r.fb[i]+1)%3;render()};
+$('sug').onclick=e=>{if(e.target.dataset.w){$('w').value=dsp(e.target.dataset.w);$('w').focus()}};
+function diag(){const k=P.indexOf('klapa'),o=[`nA=${nA} P=${P.length} klapa u P: ${k} (u rješenjima: ${k>=0&&k<nA})`,'rješenja[0..4]: '+P.slice(0,5).join(','),'rješenja zadnja: '+P.slice(Math.max(0,nA-3),nA).join(',')];
+ let C=Array.from({length:nA},(_,i)=>i);rows.forEach((r,i)=>{const c=fbc(r.fb);C=C.filter(a=>pcode(PE[r.i],PE[a])===c);o.push(`#${i+1} ${r.w} idx=${r.i} fb=${r.fb.join('')} kod=${c} klapa=${k>=0?pcode(PE[r.i],PE[k]):'-'} kandidata=${C.length}`)});
+ const t=$('dgo');t.style.display='block';t.value=o.join('\n')}
+$('diag').onclick=diag;
+let BIG=[];
+const LS3='wordlehr.big3',idb=(m,v)=>new Promise(res=>{try{const q=indexedDB.open('wordlehr',1);q.onupgradeneeded=()=>q.result.createObjectStore('s');q.onerror=()=>res(null);q.onsuccess=()=>{const st=q.result.transaction('s',m==='get'?'readonly':'readwrite').objectStore('s'),r=m==='get'?st.get('d'):st.put(v,'d');r.onsuccess=()=>res(r.result||true);r.onerror=()=>res(null)}}catch(e){res(null)}});
+function useRun(k,restored){const all=k==='all';setLists(all?[...new Set([].concat(...BIG))]:BIG[k],all?[]:[].concat(...BIG.filter((_,j)=>j!==k)),false);const im=$('imsg');im.textContent=nA?`${restored?'Učitano iz spremljenog popisa':'Učitano'}: ${nA} rješenja i ${P.length-nA} dodatnih riječi.`:'Nisam dobio valjane riječi.';
+ if(restored||!nA)return;const d={big:BIG,sel:k};let ok=0;try{localStorage.setItem(LS3,JSON.stringify(d));ok=1}catch(e){}idb('put',d).then(r=>{im.textContent+=(ok||r)?' Spremljeno za sljedeći put.':' Spremanje nije uspjelo u ovom pregledniku.'})}
+function fillSel(k){$('sel').innerHTML=`<option value="all"${k==='all'?' selected':''}>Oba popisa: sve su moguća rješenja</option>`+BIG.map((r,j)=>`<option value="${j}"${j===k?' selected':''}>Popis ${j+1}: ${r.length} riječi (${r.slice(0,3).map(dsp).join(', ')})</option>`).join('');$('sel').style.display=BIG.length?'':'none'}
+$('sel').onchange=e=>useRun(e.target.value==='all'?'all':+e.target.value);
+function noc(sets){const z=sets.findIndex(s=>!s.length);let alt=P.map((_,i)=>i);rows.forEach(r=>{const c=fbc(r.fb),G=PE[r.i];alt=alt.filter(a=>pcode(G,PE[a])===c)});return `<b>Nema kandidata</b> među rješenjima${z>0?' nakon pokušaja '+z:''}. <span class="mute">Među svim dopuštenim riječima: ${alt.length?alt.slice(0,12).map(i=>dsp(P[i])).join(', ')+(alt.length>12?' …':''):'ništa'}.</span>`}
+function dec(s){return s.replace(/\\u([0-9a-fA-F]{4})|\\x([0-9a-fA-F]{2})|\\([\s\S])/g,(m,u,x,c)=>u?String.fromCharCode(parseInt(u,16)):x?String.fromCharCode(parseInt(x,16)):c)}
+$('f').onchange=async e=>{const f=e.target.files[0];if(!f)return;const t=await f.text(),re=/"((?:[^"\\\n]|\\.)*)"|'((?:[^'\\\n]|\\.)*)'/g,runs=[];let m,cur=null,end=0,n=0,ok=0;
+ while(m=re.exec(t)){n++;const w=dec(m[1]!==undefined?m[1]:m[2]);if(RX.test(w.toLowerCase().normalize('NFC')))ok++;
+  if(cur&&/^\s*,\s*$/.test(t.slice(end,m.index)))cur.push(w);else{cur=[w];runs.push(cur)}end=re.lastIndex}
+ const big=runs.filter(r=>r.length>500),im=$('imsg');
+ if(!big.length){im.textContent=`Nisam našao popise. Datoteka ${Math.round(t.length/1024)} KB, ${n} nizova znakova, ${ok} petoslovnih riječi, najduži popis ${Math.max(0,...runs.map(r=>r.length))}.`;return}
+ BIG=big.map(r=>clean(r,1));fillSel('all');useRun('all')};
+$('apply').onclick=()=>setLists(clean($('list').value.split(/[\s,;]+/)),[],true);
+$('def').onclick=()=>{try{localStorage.removeItem(LS3)}catch(e){}idb('put',{});BIG=[];fillSel('all');$('imsg').textContent='Spremljeni popisi su obrisani.';setLists([],[],false)};
+(async()=>{let d=null;try{d=JSON.parse(localStorage.getItem(LS3))}catch(e){}if(!d||!d.big)d=await idb('get');
+ if(d&&d.big&&d.big.length){BIG=d.big;fillSel(d.sel);useRun(d.sel,1)}else{setLists([],[],false);$('f').closest('details').open=true}})();
+</script>
+</body>
+</html>
