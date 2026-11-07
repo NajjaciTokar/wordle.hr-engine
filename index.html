@@ -37,6 +37,8 @@ button{cursor:pointer}button.p{background:var(--acc);color:#fff;border-color:var
 details{margin-top:14px}textarea{width:100%;height:110px}
 .t.d{font-size:15px}input[type=file]{letter-spacing:0;text-transform:none}
 select{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;max-width:100%;margin-bottom:8px}
+pre{white-space:pre-wrap;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px;margin:0 0 8px;font:inherit}
+@media(max-width:520px){main{padding:10px}.card{padding:12px}.row{gap:4px;flex-wrap:wrap}.t{width:calc((100vw - 120px)/5);height:calc((100vw - 120px)/5);max-width:46px;max-height:46px;font-size:20px}.t.d{font-size:13px}input,textarea{font-size:16px}button,input{min-height:44px}.sg{gap:4px 6px}.sg b{font-size:15px}.chips{max-height:110px}}
 </style>
 </head>
 <body>
@@ -48,18 +50,20 @@ select{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(-
 <h2>Partija</h2>
 <div id="board"></div>
 <div class="in"><input id="w" maxlength="10" placeholder="riječ od 5 slova" autocomplete="off"><button class="p" id="add">Dodaj</button></div>
-<div class="in"><button id="undo">Poništi</button><button id="reset">Nova partija</button><button id="diag">Dijagnostika</button></div>
-<p class="mute" id="msg"></p><textarea id="dgo" style="display:none;height:150px" readonly></textarea><p class="mute">Klikni pločicu za promjenu boje: siva, žuta, zelena. lj, nj i dž su jedna pločica, kao na wordle.hr.</p>
+<div class="in"><button id="undo">Poništi</button><button id="reset">Nova partija</button></div>
+<p class="mute" id="msg"></p><p class="mute">Klikni pločicu za promjenu boje: siva, žuta, zelena. lj, nj i dž su jedna pločica, kao na wordle.hr.</p>
 </section>
 <section class="card">
 <h2>Motor</h2>
 <div id="eval"></div>
 <div class="bar"><i id="fill" style="width:0"></i></div>
-<div id="sug" class="sg"></div>
+<div id="sug" class="sg"></div><div id="exact" style="margin-top:12px"></div>
 </section>
 </div>
 <section class="card" style="margin-top:14px"><h2>Preostale riječi</h2><div id="cands" class="chips"></div></section>
-<section class="card" style="margin-top:14px"><h2>Pregled partije</h2><div id="review"></div></section>
+<section class="card" style="margin-top:14px"><h2>Graf partije</h2><div id="graph"></div></section>
+<section class="card" style="margin-top:14px"><h2>Pregled partije</h2><div id="review"></div><div id="shw" style="display:none"><h2 style="margin-top:14px">Rezultat za dijeljenje</h2><pre id="sh"></pre><button class="p" id="cp">Kopiraj rezultat</button></div></section>
+<section class="card" style="margin-top:14px"><h2>Početne riječi</h2><div id="open"></div></section>
 <details class="card"><summary>Popis riječi (<span id="cnt"></span>)</summary>
 <p class="mute">Spremi datoteku <code>main.….js</code> s wordle.hr i odaberi je ovdje. Prvi popis u njoj uzima se kao rješenja, drugi kao dodatne dopuštene riječi. Datoteka se čita samo u tvom pregledniku i ne šalje se nikamo. Izvučeni popisi spremaju se u preglednik, pa ih ne moraš ponovno učitavati.</p>
 <div class="in"><input type="file" id="f" accept=".js,.txt"></div><p class="mute" id="imsg">Još nema učitanog popisa. Odaberi datoteku main.….js.</p><select id="sel" style="display:none"></select>
@@ -75,14 +79,14 @@ const $=id=>document.getElementById(id),LS='wordlehr.lists2';
 let nA=0,P=[],PE=[],pidx=new Map(),rows=[],cache=new Map(),T=0;
 const CN=new Uint8Array(32),R=new Uint8Array(5),M=new Uint16Array(243);
 const clean=(a,raw)=>[...new Set(a.map(w=>raw?String(w).toLowerCase().normalize('NFC'):dg(w)).filter(w=>RX.test(w)))];
-function setLists(A,E,save){const s=new Set(A);P=A.concat(E.filter(w=>!s.has(w)));nA=A.length;PE=P.map(w=>Uint8Array.from([...w],c=>ix[c]));pidx=new Map(P.map((w,i)=>[w,i]));cache.clear();rows=[];
+function setLists(A,E,save){const s=new Set(A);P=A.concat(E.filter(w=>!s.has(w)));nA=A.length;PE=P.map(w=>Uint8Array.from([...w],c=>ix[c]));pidx=new Map(P.map((w,i)=>[w,i]));cache.clear();memo.clear();rows=[];
  $('cnt').textContent=nA+' rješenja · '+P.length+' dopuštenih riječi';
  if(save)try{localStorage.setItem(LS,JSON.stringify({a:A,e:E}))}catch(x){}
  render()}
 function pcode(g,a){CN.fill(0);for(let i=0;i<5;i++){R[i]=g[i]===a[i]?2:0;if(!R[i])CN[a[i]]++}for(let i=0;i<5;i++)if(!R[i]&&CN[g[i]]>0){R[i]=1;CN[g[i]]--}return R[0]+3*R[1]+9*R[2]+27*R[3]+81*R[4]}
 const fbc=f=>f[0]+3*f[1]+9*f[2]+27*f[3]+81*f[4];
 function ent(g,C){M.fill(0);const G=PE[g];for(const a of C)M[pcode(G,PE[a])]++;let h=0;const n=C.length;for(const v of M)if(v){const p=v/n;h-=p*Math.log2(p)}return h}
-function best(C,key){let r=cache.get(key);if(r)return r;const s=new Set(C),L=[];for(let g=0;g<P.length;g++){const e=ent(g,C),c=g<nA&&s.has(g)?1:0;L.push([e+c/C.length,c,g,e])}L.sort((x,y)=>y[0]-x[0]||y[1]-x[1]);r={top:L.slice(0,8),bs:L[0][0]};cache.set(key,r);return r}
+function best(C,key){let r=cache.get(key);if(r)return r;const s=new Set(C),L=[];for(let g=0;g<P.length;g++){const e=ent(g,C),c=g<nA&&s.has(g)?1:0;L.push([e+c/C.length,c,g,e])}L.sort((x,y)=>y[0]-x[0]||y[1]-x[1]);r={top:L.slice(0,8),bs:L[0][0],all:key==='k|'?L:null};cache.set(key,r);return r}
 function label(r){return r>=.97?['Najbolji','var(--g)']:r>=.85?['Odličan','var(--g)']:r>=.7?['Dobar','var(--acc)']:r>=.5?['Nepreciznost','var(--y)']:['Greška','#d9534f']}
 function render(){$('eval').textContent='Računam…';clearTimeout(T);T=setTimeout(draw,20)}
 function draw(){
@@ -96,24 +100,36 @@ function draw(){
  const top=N>1?best(C,keys[keys.length-1]).top:[],mx=top.length?Math.max(...top.map(s=>s[3]))||1:1;
  $('sug').innerHTML=top.map(s=>`<b data-w="${P[s[2]]}">${dsp(P[s[2]])}</b><div class="m" style="width:${Math.max(4,s[3]/mx*100)}%"></div><span class="mute">${s[3].toFixed(2)} bita${s[1]?' · moguće rješenje':''}</span>`).join('')||'<span class="mute">Nema prijedloga.</span>';
  $('cands').innerHTML=C.slice(0,150).map(i=>`<span>${dsp(P[i])}</span>`).join('')+(N>150?`<span>… +${N-150}</span>`:'');
- let acc=[],h='';
+ let acc=[],h='',lab=[];
  rows.forEach((r,i)=>{const S=sets[i],nx=sets[i+1].length;let e='-',bb='-',q,got=NaN;
   if(S.length===0){acc.push(1);h+=`<tr><td>${i+1}</td><td>${dsp(r.w)}</td><td>0</td><td>-</td><td>-</td><td>-</td></tr>`;return}
   const inS=S.includes(r.i);
   if(S.length===1){q=inS?1:0}else{const b=best(S,keys[i]),sc=ent(r.i,S)+(inS?1/S.length:0);q=b.bs>0?Math.min(1,sc/b.bs):1;e=sc.toFixed(2);bb=b.bs.toFixed(2);got=nx?Math.log2(S.length/nx):NaN}
   const L=label(q);acc.push(q);
   h+=`<tr><td>${i+1}</td><td>${dsp(r.w)}</td><td>${S.length}→${nx}</td><td>${e} / ${bb}</td><td>${isNaN(got)?'-':got.toFixed(2)}</td><td style="color:${L[1]};font-weight:600">${S.length===1&&!inS?'Greška (rješenje: '+dsp(P[S[0]])+')':L[0]}</td></tr>`;
-  const t=$('tg'+i);if(t){t.className='tag';t.style.color=L[1];t.textContent=L[0]}});
- $('review').innerHTML=rows.length?`<p>Točnost: <b>${Math.round(acc.reduce((a,b)=>a+b,0)/acc.length*100)}%</b> <span class="mute">(bitovi informacije pokušaja, uz mali bonus ako je moguće rješenje, u odnosu na najbolji potez; kad ostane jedan kandidat, jedini dobar potez je pogoditi ga)</span></p><table class="rv"><tr><th>#</th><th>Riječ</th><th>Kandidati</th><th>Očekivano / najbolje</th><th>Dobiveno</th><th>Ocjena</th></tr>${h}</table>`:'<span class="mute">Pregled se pojavljuje nakon prvog pokušaja.</span>'}
+  lab.push(L[0]);const t=$('tg'+i);if(t){t.className='tag';t.style.color=L[1];t.textContent=L[0]}});
+ $('review').innerHTML=rows.length?`<p>Točnost: <b>${Math.round(acc.reduce((a,b)=>a+b,0)/acc.length*100)}%</b> <span class="mute">(bitovi informacije pokušaja, uz mali bonus ako je moguće rješenje, u odnosu na najbolji potez; kad ostane jedan kandidat, jedini dobar potez je pogoditi ga)</span></p><table class="rv"><tr><th>#</th><th>Riječ</th><th>Kandidati</th><th>Očekivano / najbolje</th><th>Dobiveno</th><th>Ocjena</th></tr>${h}</table>`:'<span class="mute">Pregled se pojavljuje nakon prvog pokušaja.</span>';extra(sets,C,N,acc,lab)}
+const memo=new Map();
+function solve(C,full){if(C.length<2)return C.length;const key=(full?'F':'c')+C.join(',');let v=memo.get(key);if(v)return v;v=99;const pool=full?P.map((_,i)=>i):C;for(const g of pool){const w=worst(g,C);if(w<v)v=w}memo.set(key,v);return v}
+function worst(g,C){const m=new Map(),G=PE[g];for(const a of C){const p=pcode(G,PE[a]);let l=m.get(p);if(!l)m.set(p,l=[]);l.push(a)}let w=0;for(const[p,l]of m){if(p===242)continue;if(l.length===C.length)return 99;w=Math.max(w,solve(l,false))}return 1+w}
+function exactSolve(C){const k=solve(C,true),S=new Set(C),w=[];for(let g=0;g<P.length;g++)if(worst(g,C)===k)w.push(g);w.sort((a,b)=>S.has(b)-S.has(a));return{k,w:w.slice(0,5)}}
+function extra(sets,C,N,acc,lab){
+ const pts=sets.map(s=>s.length?Math.log2(s.length):0),mx=Math.log2(Math.max(2,nA)),W=320,H=110,X=i=>20+i*(W-30)/Math.max(1,pts.length-1),Y=b=>8+(1-b/mx)*(H-24);
+ $('graph').innerHTML=pts.length<2?'<span class="mute">Graf se pojavljuje nakon prvog pokušaja.</span>':`<svg viewBox="0 0 ${W} ${H}" style="width:100%;max-width:520px"><polyline fill="none" stroke="var(--acc)" stroke-width="2" points="${pts.map((b,i)=>X(i)+','+Y(b)).join(' ')}"/>${pts.map((b,i)=>`<circle cx="${X(i)}" cy="${Y(b)}" r="3.5" fill="var(--acc)"><title>${i?'Pokušaj '+i+': ':'Početak: '}${sets[i].length} riječi, ${b.toFixed(1)} bita</title></circle><text x="${X(i)}" y="${H-4}" font-size="9" text-anchor="middle" fill="var(--mute)">${i}</text>`).join('')}</svg><div class="mute">Preostala neizvjesnost u bitima nakon svakog pokušaja (0 je početak). Veći pad znači bolji potez.</div>`;
+ const ex=$('exact');ex.innerHTML='';
+ if(N>=2&&N<=30){const r=exactSolve(C);if(r.k<99)ex.innerHTML=`<b>Zajamčeni završetak:</b> rješenje u najviše <b>${r.k}</b> ${r.k<5?'pokušaja':'pokušaja'} s pokušajem ${r.w.map(i=>dsp(P[i])).join(', ')}.`}
+ const z=sets.findIndex(s=>!s.length);if(z>0){const t=$('tg'+(z-1));if(t){t.className='tag';t.style.color='#d9534f';t.textContent='Nemoguće boje'}}
+ const k0=cache.get('k|');
+ $('open').innerHTML=k0&&k0.all?`<div class="chips">${k0.all.slice(0,10).map((s,i)=>`<span>${i+1}. ${dsp(P[s[2]])} · ${s[3].toFixed(2)}</span>`).join('')}</div>`+(rows.length?`<p class="mute">Tvoja prva riječ ${dsp(rows[0].w)} je ${k0.all.findIndex(s=>s[2]===rows[0].i)+1}. od ${P.length} (${k0.all.find(s=>s[2]===rows[0].i)[3].toFixed(2)} bita).</p>`:''):'<span class="mute">Učitaj popis riječi.</span>';
+ if(!rows.length){$('shw').style.display='none';return}
+ const em=['⬛','🟨','🟩'],won=rows[rows.length-1].fb.every(x=>x===2),pct=Math.round(acc.reduce((a,b)=>a+b,0)/acc.length*100),cnt={};lab.forEach(l=>cnt[l]=(cnt[l]||0)+1);
+ $('sh').textContent=`wordle.hr engine · točnost ${pct}% · ${won?rows.length:'X'}/6\n\n`+rows.map(r=>r.fb.map(x=>em[x]).join('')).join('\n')+'\n\n'+Object.entries(cnt).map(([k,v])=>k+' ×'+v).join(' · ');$('shw').style.display=''}
+$('cp').onclick=async()=>{const b=$('cp');try{await navigator.clipboard.writeText($('sh').textContent);b.textContent='Kopirano!'}catch(e){const r=document.createRange();r.selectNodeContents($('sh'));const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Označeno, kopiraj ručno'}setTimeout(()=>b.textContent='Kopiraj rezultat',2500)};
 function add(){const w=dg($('w').value.trim());if(!RX.test(w)){$('w').focus();return}if(!pidx.has(w)){$('msg').textContent=P.length?'Nije na popisu riječi':'Prvo učitaj popis riječi iz datoteke main.….js';return}$('msg').textContent='';rows.push({w,i:pidx.get(w),fb:[0,0,0,0,0]});$('w').value='';render()}
 $('add').onclick=add;$('w').onkeydown=e=>{if(e.key==='Enter')add()};
 $('undo').onclick=()=>{rows.pop();render()};$('reset').onclick=()=>{rows=[];render()};
 $('board').onclick=e=>{const t=e.target.closest('.t');if(!t)return;const r=rows[+t.dataset.r],i=+t.dataset.i;r.fb[i]=(r.fb[i]+1)%3;render()};
 $('sug').onclick=e=>{if(e.target.dataset.w){$('w').value=dsp(e.target.dataset.w);$('w').focus()}};
-function diag(){const k=P.indexOf('klapa'),o=[`nA=${nA} P=${P.length} klapa u P: ${k} (u rješenjima: ${k>=0&&k<nA})`,'rješenja[0..4]: '+P.slice(0,5).join(','),'rješenja zadnja: '+P.slice(Math.max(0,nA-3),nA).join(',')];
- let C=Array.from({length:nA},(_,i)=>i);rows.forEach((r,i)=>{const c=fbc(r.fb);C=C.filter(a=>pcode(PE[r.i],PE[a])===c);o.push(`#${i+1} ${r.w} idx=${r.i} fb=${r.fb.join('')} kod=${c} klapa=${k>=0?pcode(PE[r.i],PE[k]):'-'} kandidata=${C.length}`)});
- const t=$('dgo');t.style.display='block';t.value=o.join('\n')}
-$('diag').onclick=diag;
 let BIG=[];
 const LS3='wordlehr.big3',idb=(m,v)=>new Promise(res=>{try{const q=indexedDB.open('wordlehr',1);q.onupgradeneeded=()=>q.result.createObjectStore('s');q.onerror=()=>res(null);q.onsuccess=()=>{const st=q.result.transaction('s',m==='get'?'readonly':'readwrite').objectStore('s'),r=m==='get'?st.get('d'):st.put(v,'d');r.onsuccess=()=>res(r.result||true);r.onerror=()=>res(null)}}catch(e){res(null)}});
 function useRun(k,restored){const all=k==='all';setLists(all?[...new Set([].concat(...BIG))]:BIG[k],all?[]:[].concat(...BIG.filter((_,j)=>j!==k)),false);const im=$('imsg');im.textContent=nA?`${restored?'Učitano iz spremljenog popisa':'Učitano'}: ${nA} rješenja i ${P.length-nA} dodatnih riječi.`:'Nisam dobio valjane riječi.';
