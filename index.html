@@ -39,34 +39,68 @@ details{margin-top:14px}textarea{width:100%;height:110px}
 select{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;max-width:100%;margin-bottom:8px}
 pre{white-space:pre-wrap;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px;margin:0 0 8px;font:inherit}
 @media(max-width:520px){main{padding:10px}.card{padding:12px}.row{gap:4px;flex-wrap:wrap}.t{width:calc((100vw - 120px)/5);height:calc((100vw - 120px)/5);max-width:46px;max-height:46px;font-size:20px}.t.d{font-size:13px}input,textarea{font-size:16px}button,input{min-height:44px}.sg{gap:4px 6px}.sg b{font-size:15px}.chips{max-height:110px}}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.seg,.tabs{display:flex;gap:4px}.seg button,.tabs button{padding:6px 12px}.seg .on,.tabs .on{background:var(--acc);color:#fff;border-color:var(--acc)}
+.tabs{margin-bottom:14px}.nav{display:flex;gap:10px;align-items:center;margin:8px 0}
+.row.sel{background:color-mix(in srgb,var(--acc) 14%,transparent);border-radius:8px;padding:3px;margin-left:-3px}
+summary{cursor:pointer}details.card{margin-top:14px}
+.t.e{background:transparent;border:2px solid var(--line);color:var(--ink)}.t.f{border-color:var(--mute)}#gg .row{justify-content:center}
+.kr{display:flex;gap:4px;justify-content:center;margin-bottom:4px}.k{flex:1;min-width:0;max-width:48px;padding:10px 0;font-size:14px;border-radius:6px}.k.s0{background:var(--x);color:#fff}.k.s1{background:var(--y);color:#fff}.k.s2{background:var(--g);color:#fff}
+.t.c0{--fc:var(--x)}.t.c1{--fc:var(--y)}.t.c2{--fc:var(--g)}
+@keyframes flip{0%{transform:rotateX(0);background:transparent;box-shadow:inset 0 0 0 2px #565758;color:var(--ink)}49.9%{transform:rotateX(90deg);background:transparent;box-shadow:inset 0 0 0 2px #565758;color:var(--ink)}50%{transform:rotateX(90deg);background:var(--fc);box-shadow:none;color:#d7dadc}100%{transform:rotateX(0);background:var(--fc);box-shadow:none;color:#d7dadc}}
+@keyframes wave{0%,15%{transform:translateY(0)}45%{transform:translateY(16px)}65%{transform:translateY(-4px)}100%{transform:translateY(0)}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
+@keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.12)}100%{transform:scale(1)}}
+.t.flip{animation:flip .5s ease both}.t.bounce{animation:wave 1s ease both}.row.shake{animation:shake .4s}.t.pop{animation:pop .12s}
+.noanim .t.flip,.noanim .t.bounce,.noanim .row.shake,.noanim .t.pop{animation:none}
+[data-a]{cursor:pointer}.chips span.on,.lnk.on{border-color:var(--acc);color:var(--acc)}.lnk{margin-right:8px;text-decoration:underline}
+.pt{display:inline-flex;gap:2px}.pt i{width:14px;height:14px;border-radius:3px;display:inline-block}.pt i.c0{background:var(--x)}.pt i.c1{background:var(--y)}.pt i.c2{background:var(--g)}
+.or{display:grid;grid-template-columns:84px 1fr auto;gap:2px 10px;align-items:center;padding:6px;border-radius:8px}.or[data-a]:hover{background:var(--bg)}.or .bb{height:8px;background:var(--acc);border-radius:9px}.or .ex{grid-column:1/-1;font-size:12px;color:var(--mute)}
+/* wordle.hr look */
+:root:root:root{--bg:#121213;--card:#121213;--ink:#d7dadc;--mute:#818384;--line:#3a3a3c;--g:#538d4e;--y:#b59f3b;--x:#3a3a3c;--acc:#538d4e;color-scheme:dark}
+body{font-family:"Helvetica Neue",Arial,sans-serif}.card{background:transparent;border-radius:4px}
+.top{display:flex;align-items:center;justify-content:space-between;max-width:500px;margin:0 auto 12px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.top h1{margin:0;font-size:34px;letter-spacing:.14em;font-weight:800;color:var(--ink);text-align:center}.top h1 small{font-size:20px;letter-spacing:.06em;margin-left:4px;vertical-align:-3px}
+.ic{background:none;border:0;color:var(--mute);font-size:24px;padding:4px 8px;min-height:0;cursor:pointer}
+.tabs{justify-content:center}.tabs button{background:none;border:0;border-bottom:2px solid transparent;border-radius:0;color:var(--mute);text-transform:uppercase;letter-spacing:.08em;font-weight:700;padding:8px 14px}.tabs .on{background:none;color:var(--ink);border-bottom-color:var(--g)}
+button.p{background:var(--g);border-color:var(--g);color:#fff}
+.t{color:#d7dadc;font-family:inherit}.t.e{border-color:#3a3a3c}.t.f{border-color:#565758}
+#gg{--ts:min(62px,calc((100vw - 60px)/5.4))}#gg .t{width:var(--ts);height:var(--ts);font-size:32px;border-radius:0}#gg .t.d{font-size:20px}#gg .row{gap:5px;margin-bottom:5px}
+#v3 .card{max-width:500px;margin:0 auto;border:0}#v3 h2{display:none}
+#kb{max-width:500px;margin:0 auto}.kr{gap:6px;margin-bottom:8px}
+.k{max-width:none;flex:1;height:58px;min-height:0;padding:0;border:0;background:#818384;color:#d7dadc;font-size:13px;font-weight:700;text-transform:uppercase;border-radius:4px}.k.s0{background:#3a3a3c}.k.s1{background:#b59f3b}.k.s2{background:#538d4e}.k[data-k="⏎"],.k[data-k="⌫"]{flex:1.5}
+#toast{position:fixed;top:96px;left:50%;transform:translateX(-50%);background:#d7dadc;color:#121213;font-weight:700;font-size:14px;padding:12px 16px;border-radius:4px;z-index:70;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}#toast.on{opacity:1}
+[data-m]{cursor:pointer}@media(max-width:520px){#mc{height:430px!important}}
 </style>
 </head>
 <body>
+<canvas id="fx" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:60"></canvas>
+<div id="toast"></div>
 <main>
-<h1>wordle.hr · Analiza</h1>
-<p class="sub">Motor za hrvatski Wordle: unesi svoje pokušaje, označi boje pločica i motor računa najbolji sljedeći potez, kao u šahu.</p>
+<header class="top"><button class="ic" id="help" title="Pomoć">?</button><h1>WORDLE <small>HR</small></h1><button class="ic" id="gear" title="Postavke">⚙</button></header>
+<div id="lk" class="card" style="display:none;margin-bottom:14px"></div>
+<nav class="tabs"><button id="t1" class="on">Analiza</button><button id="t3">Igra</button><button id="t2">Stablo</button></nav>
+<div id="v1">
 <div class="grid">
-<section class="card">
-<h2>Partija</h2>
-<div id="board"></div>
+<section class="card"><h2>Partija</h2><div id="board"></div>
+<div class="nav"><button id="pv">◀</button><span id="pos" class="mute"></span><button id="nx">▶</button></div>
 <div class="in"><input id="w" maxlength="10" placeholder="riječ od 5 slova" autocomplete="off"><button class="p" id="add">Dodaj</button></div>
 <div class="in"><button id="undo">Poništi</button><button id="reset">Nova partija</button></div>
-<p class="mute" id="msg"></p><p class="mute">Klikni pločicu za promjenu boje: siva, žuta, zelena. lj, nj i dž su jedna pločica, kao na wordle.hr.</p>
+<p class="mute" id="msg"></p><p class="mute">Klikni pločicu za promjenu boje: siva, žuta, zelena. Strelice na tipkovnici listaju poteze.</p>
 </section>
-<section class="card">
-<h2>Motor</h2>
-<div id="eval"></div>
-<div class="bar"><i id="fill" style="width:0"></i></div>
-<div id="sug" class="sg"></div><div id="exact" style="margin-top:12px"></div>
-</section>
+<section class="card"><h2>Motor</h2><div id="mv" style="margin-bottom:8px"></div><div id="eval"></div><div class="bar"><i id="fill" style="width:0"></i></div><div id="sug" class="sg"></div><div id="exact" style="margin-top:12px"></div><details style="margin-top:12px"><summary>Preostale riječi (<span id="nc">0</span>)</summary><div id="cands" class="chips" style="margin-top:10px"></div></details></section>
 </div>
-<section class="card" style="margin-top:14px"><h2>Preostale riječi</h2><div id="cands" class="chips"></div></section>
-<section class="card" style="margin-top:14px"><h2>Graf partije</h2><div id="graph"></div></section>
-<section class="card" style="margin-top:14px"><h2>Pregled partije</h2><div id="review"></div><div id="shw" style="display:none"><h2 style="margin-top:14px">Rezultat za dijeljenje</h2><pre id="sh"></pre><button class="p" id="cp">Kopiraj rezultat</button></div></section>
-<section class="card" style="margin-top:14px"><h2>Početne riječi</h2><div id="open"></div></section>
-<details class="card"><summary>Popis riječi (<span id="cnt"></span>)</summary>
+<section class="card" style="margin-top:14px"><h2>Tijek partije</h2><div id="sum" style="margin-bottom:6px"></div><div id="graph"></div></section>
+<details class="card"><summary>Detalji ocjena i rezultat za dijeljenje</summary><div id="review" style="margin-top:10px"></div><div id="shw" style="display:none"><h2 style="margin-top:14px">Rezultat za dijeljenje</h2><pre id="sh"></pre><button class="p" id="cp">Kopiraj rezultat</button> <button id="cl">Kopiraj poveznicu</button> <span class="mute">Poveznica otkriva odigrane riječi.</span></div></details>
+</div>
+<div id="v3" style="display:none"><section class="card"><h2>Igra</h2><div id="gg"></div><p class="mute" id="gm" style="text-align:center;min-height:1.4em"></p><div id="kb"></div><div id="gr" style="display:none"></div><div class="in"><button class="p" id="ga" style="display:none">Analiziraj</button><button id="gn">Nova igra</button><button id="gu">Odustani</button></div><p class="mute">Čisto vježbanje bez pomoći motora. Rješenja su samo riječi s popisa rješenja. Na kraju možeš otvoriti analizu.</p></section></div>
+<div id="v2" style="display:none"><section class="card"><h2>Stablo početnih riječi</h2><div class="seg" style="margin-bottom:10px"><button id="vm" class="on">Karta</button><button id="vl">Lista</button></div>
+<div id="mapv"><div id="mentry"></div><div id="mwrap" style="display:none"><div class="chips" style="max-height:none;margin-bottom:8px"><span data-m="back">◀ Riječi</span><span data-m="z+">＋</span><span data-m="z-">−</span><span data-m="fit">Cijela karta</span><span data-m="lvl">Proširi razinu</span></div><canvas id="mc" style="width:100%;height:520px;touch-action:none;border:1px solid var(--line);border-radius:4px;background:#0d0d0e;display:block"></canvas><div id="mi" style="margin-top:10px"></div></div></div>
+<div id="open" style="display:none"></div></section></div>
+<details class="card" id="ls"><summary>Postavke i popis riječi (<span id="cnt"></span>)</summary>
+<p><label><input type="checkbox" id="anim" checked style="min-height:0"> Animacije u igri</label></p>
 <p class="mute">Spremi datoteku <code>main.….js</code> s wordle.hr i odaberi je ovdje. Prvi popis u njoj uzima se kao rješenja, drugi kao dodatne dopuštene riječi. Datoteka se čita samo u tvom pregledniku i ne šalje se nikamo. Izvučeni popisi spremaju se u preglednik, pa ih ne moraš ponovno učitavati.</p>
-<div class="in"><input type="file" id="f" accept=".js,.txt"></div><p class="mute" id="imsg">Još nema učitanog popisa. Odaberi datoteku main.….js.</p><select id="sel" style="display:none"></select>
+<div class="in"><input type="file" id="f" accept=".js,.txt"></div><p class="mute" id="imsg">Još nema učitanog popisa. Odaberi datoteku main.….js.</p>
 <p class="mute">Ili zalijepi vlastiti popis rješenja:</p>
 <textarea id="list"></textarea><div class="in"><button class="p" id="apply">Primijeni popis</button><button id="def">Obriši popise</button></div></details>
 </main>
@@ -76,78 +110,199 @@ const ix={};[...AL].forEach((c,i)=>ix[c]=i+1);
 const dg=t=>t.toLowerCase().normalize('NFC').replace(/dž/g,'ǆ').replace(/lj/g,'ǉ').replace(/nj/g,'ǌ');
 const sh=c=>c==='ǆ'?'dž':c==='ǉ'?'lj':c==='ǌ'?'nj':c,dsp=w=>[...w].map(sh).join('');
 const $=id=>document.getElementById(id),LS='wordlehr.lists2';
-let nA=0,P=[],PE=[],pidx=new Map(),rows=[],cache=new Map(),T=0;
+let nA=0,nC=0,P=[],PE=[],pidx=new Map(),rows=[],cache=new Map(),T=0;
 const CN=new Uint8Array(32),R=new Uint8Array(5),M=new Uint16Array(243);
 const clean=(a,raw)=>[...new Set(a.map(w=>raw?String(w).toLowerCase().normalize('NFC'):dg(w)).filter(w=>RX.test(w)))];
-function setLists(A,E,save){const s=new Set(A);P=A.concat(E.filter(w=>!s.has(w)));nA=A.length;PE=P.map(w=>Uint8Array.from([...w],c=>ix[c]));pidx=new Map(P.map((w,i)=>[w,i]));cache.clear();memo.clear();rows=[];
+function setLists(A,E,save){const s=new Set(A);P=A.concat(E.filter(w=>!s.has(w)));nA=A.length;nC=P.length;PE=P.map(w=>Uint8Array.from([...w],c=>ix[c]));pidx=new Map(P.map((w,i)=>[w,i]));cache.clear();memo.clear();TS=null;rows=rows.map(r=>({...r,i:pidx.get(r.w)})).filter(r=>r.i!==undefined);
  $('cnt').textContent=nA+' rješenja · '+P.length+' dopuštenih riječi';
  if(save)try{localStorage.setItem(LS,JSON.stringify({a:A,e:E}))}catch(x){}
  render()}
 function pcode(g,a){CN.fill(0);for(let i=0;i<5;i++){R[i]=g[i]===a[i]?2:0;if(!R[i])CN[a[i]]++}for(let i=0;i<5;i++)if(!R[i]&&CN[g[i]]>0){R[i]=1;CN[g[i]]--}return R[0]+3*R[1]+9*R[2]+27*R[3]+81*R[4]}
 const fbc=f=>f[0]+3*f[1]+9*f[2]+27*f[3]+81*f[4];
 function ent(g,C){M.fill(0);const G=PE[g];for(const a of C)M[pcode(G,PE[a])]++;let h=0;const n=C.length;for(const v of M)if(v){const p=v/n;h-=p*Math.log2(p)}return h}
-function best(C,key){let r=cache.get(key);if(r)return r;const s=new Set(C),L=[];for(let g=0;g<P.length;g++){const e=ent(g,C),c=g<nA&&s.has(g)?1:0;L.push([e+c/C.length,c,g,e])}L.sort((x,y)=>y[0]-x[0]||y[1]-x[1]);r={top:L.slice(0,8),bs:L[0][0],all:key==='k|'?L:null};cache.set(key,r);return r}
-function label(r){return r>=.97?['Najbolji','var(--g)']:r>=.85?['Odličan','var(--g)']:r>=.7?['Dobar','var(--acc)']:r>=.5?['Nepreciznost','var(--y)']:['Greška','#d9534f']}
+function best(C,key){let r=cache.get(key);if(r)return r;const s=new Set(C),L=[];for(let g=0;g<P.length;g++){const e=ent(g,C),c=s.has(g)?1:0;L.push([e+c/C.length,c,g,e])}L.sort((x,y)=>y[0]-x[0]||y[1]-x[1]);r={top:L.slice(0,8),bs:L[0][0],all:key==='k|'?L:null};cache.set(key,r);return r}
+function label(r){return r>=.97?['Najbolji','var(--g)']:r>=.85?['Odličan','var(--g)']:r>=.7?['Dobar','#6b9bff']:r>=.5?['Nepreciznost','var(--y)']:['Greška','#d9534f']}
 function render(){$('eval').textContent='Računam…';clearTimeout(T);T=setTimeout(draw,20)}
+let cur=0;
 function draw(){
- const sets=[Array.from({length:nA},(_,i)=>i)],keys=['k|'];
+ const sets=[Array.from({length:nC},(_,i)=>i)],keys=['k|'];
  rows.forEach(r=>{const c=fbc(r.fb),G=PE[r.i],p=sets[sets.length-1];sets.push(p.filter(a=>pcode(G,PE[a])===c));keys.push(keys[keys.length-1]+r.w+c+'|')});
- const C=sets[sets.length-1],N=C.length;
- $('board').innerHTML=rows.map((r,ri)=>`<div class="row">${[...r.w].map((ch,i)=>`<button class="t c${r.fb[i]}${'ǆǉǌ'.includes(ch)?' d':''}" data-r="${ri}" data-i="${i}">${sh(ch)}</button>`).join('')}<span id="tg${ri}"></span></div>`).join('')||'<p class="mute">Još nema pokušaja. Upiši prvu riječ.</p>';
- const bits=N>0?Math.log2(N):0;
- $('eval').innerHTML=P.length===0?'<b>Nema učitanih riječi.</b> <span class="mute">Učitaj datoteku main.….js u odjeljku Popis riječi.</span>':N===0?noc(sets):N===1?`<b>Rješenje: ${dsp(P[C[0]])}</b>`:`<b>${N}</b> preostalih riječi · ${bits.toFixed(1)} bita neizvjesnosti`;
- $('fill').style.width=(N<=1?(N?100:0):Math.max(2,(1-bits/Math.log2(nA))*100))+'%';
- const top=N>1?best(C,keys[keys.length-1]).top:[],mx=top.length?Math.max(...top.map(s=>s[3]))||1:1;
+ const n=rows.length;cur=Math.max(0,Math.min(cur,n));
+ const C=sets[cur],N=C.length,bits=N>0?Math.log2(N):0;
+ $('board').innerHTML=rows.map((r,ri)=>`<div class="row${ri===cur?' sel':''}">${[...r.w].map((ch,i)=>`<button class="t c${r.fb[i]}${'ǆǉǌ'.includes(ch)?' d':''}" data-r="${ri}" data-i="${i}">${sh(ch)}</button>`).join('')}<span id="tg${ri}"></span></div>`).join('')||'<p class="mute">Još nema pokušaja. Upiši prvu riječ.</p>';
+ $('pos').textContent=n?(cur<n?`Potez ${cur+1} / ${n} · prije poteza`:'Nakon zadnjeg poteza'):'';
+ $('eval').innerHTML=P.length===0?'<b>Nema učitanih riječi.</b> <span class="mute">Učitaj datoteku main.….js u odjeljku Postavke.</span>':N===0?noc(sets):N===1?`<b>Rješenje: ${dsp(P[C[0]])}</b>`:`<b>${N}</b> preostalih riječi · ${bits.toFixed(1)} bita neizvjesnosti`;
+ $('fill').style.width=(N<=1?(N?100:0):Math.max(2,(1-bits/Math.log2(nC))*100))+'%';
+ const top=N>1?best(C,keys[cur]).top:[],mx=top.length?Math.max(...top.map(s=>s[3]))||1:1;
  $('sug').innerHTML=top.map(s=>`<b data-w="${P[s[2]]}">${dsp(P[s[2]])}</b><div class="m" style="width:${Math.max(4,s[3]/mx*100)}%"></div><span class="mute">${s[3].toFixed(2)} bita${s[1]?' · moguće rješenje':''}</span>`).join('')||'<span class="mute">Nema prijedloga.</span>';
- $('cands').innerHTML=C.slice(0,150).map(i=>`<span>${dsp(P[i])}</span>`).join('')+(N>150?`<span>… +${N-150}</span>`:'');
- let acc=[],h='',lab=[];
+ $('nc').textContent=N;$('cands').innerHTML=C.slice(0,150).map(i=>`<span>${dsp(P[i])}</span>`).join('')+(N>150?`<span>… +${N-150}</span>`:'');
+ let mv='';if(cur<n&&N>=1){const r=rows[cur],inS=C.includes(r.i);let q,alt='';
+  if(N===1){q=inS?1:0;if(!inS)alt=dsp(P[C[0]])+' (jedini kandidat)'}else{const b=best(C,keys[cur]),sc=ent(r.i,C)+(inS?1/N:0);q=b.bs>0?Math.min(1,sc/b.bs):1;if(q<.97)alt=dsp(P[b.top[0][2]])+' (+'+(b.bs-sc).toFixed(2)+' bita)'}
+  const L=label(q);mv=`Tvoj potez: <b>${dsp(r.w)}</b> · <span style="color:${L[1]};font-weight:600">${L[0]}</span>`+(alt?`<br><span class="mute">Motor je preferirao:</span> <b>${alt}</b>`:'')}
+ $('mv').innerHTML=mv;
+ let acc=[],h='',lab=[],luck=0;
  rows.forEach((r,i)=>{const S=sets[i],nx=sets[i+1].length;let e='-',bb='-',q,got=NaN;
   if(S.length===0){acc.push(1);h+=`<tr><td>${i+1}</td><td>${dsp(r.w)}</td><td>0</td><td>-</td><td>-</td><td>-</td></tr>`;return}
   const inS=S.includes(r.i);
-  if(S.length===1){q=inS?1:0}else{const b=best(S,keys[i]),sc=ent(r.i,S)+(inS?1/S.length:0);q=b.bs>0?Math.min(1,sc/b.bs):1;e=sc.toFixed(2);bb=b.bs.toFixed(2);got=nx?Math.log2(S.length/nx):NaN}
-  const L=label(q);acc.push(q);
+  if(S.length===1){q=inS?1:0}else{const b=best(S,keys[i]),eh=ent(r.i,S),sc=eh+(inS?1/S.length:0);q=b.bs>0?Math.min(1,sc/b.bs):1;e=sc.toFixed(2);bb=b.bs.toFixed(2);if(nx){got=Math.log2(S.length/nx);luck+=got-eh}}
+  const L=label(q);acc.push(q);lab.push(L[0]);
   h+=`<tr><td>${i+1}</td><td>${dsp(r.w)}</td><td>${S.length}→${nx}</td><td>${e} / ${bb}</td><td>${isNaN(got)?'-':got.toFixed(2)}</td><td style="color:${L[1]};font-weight:600">${S.length===1&&!inS?'Greška (rješenje: '+dsp(P[S[0]])+')':L[0]}</td></tr>`;
-  lab.push(L[0]);const t=$('tg'+i);if(t){t.className='tag';t.style.color=L[1];t.textContent=L[0]}});
- $('review').innerHTML=rows.length?`<p>Točnost: <b>${Math.round(acc.reduce((a,b)=>a+b,0)/acc.length*100)}%</b> <span class="mute">(bitovi informacije pokušaja, uz mali bonus ako je moguće rješenje, u odnosu na najbolji potez; kad ostane jedan kandidat, jedini dobar potez je pogoditi ga)</span></p><table class="rv"><tr><th>#</th><th>Riječ</th><th>Kandidati</th><th>Očekivano / najbolje</th><th>Dobiveno</th><th>Ocjena</th></tr>${h}</table>`:'<span class="mute">Pregled se pojavljuje nakon prvog pokušaja.</span>';extra(sets,C,N,acc,lab)}
+  const t=$('tg'+i);if(t){t.className='tag';t.style.color=L[1];t.textContent=L[0]}});
+ $('review').innerHTML=n?`<table class="rv"><tr><th>#</th><th>Riječ</th><th>Kandidati</th><th>Očekivano / najbolje</th><th>Dobiveno</th><th>Ocjena</th></tr>${h}</table>`:'<span class="mute">Pregled se pojavljuje nakon prvog pokušaja.</span>';
+ extra(sets,C,N,acc,lab,luck,n)}
+$('t1').onclick=()=>tab(1);$('t2').onclick=()=>tab(2);
+function tab(k){[1,2,3].forEach(i=>{$('v'+i).style.display=i===k?'':'none';$('t'+i).className=i===k?'on':''});if(k===3)game()}
+$('t3').onclick=()=>tab(3);
+$('pv').onclick=()=>{cur--;draw()};$('nx').onclick=()=>{cur++;draw()};
+document.addEventListener('keydown',e=>{if($('v1').style.display==='none'||/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName))return;if(e.key==='ArrowLeft'){cur--;draw()}if(e.key==='ArrowRight'){cur++;draw()}});
+$('graph').onclick=e=>{const c=e.target.closest('[data-i]');if(c){cur=Math.max(0,+c.dataset.i-1);draw()}};
+let GS=null,buf=[],busy=false,flipY=-1,bounceY=-1,shakeY=-1,popI=-1;const GK='wordlehr.game',ANK='wordlehr.anim';let RED=false;try{RED=localStorage.getItem(ANK)==='0'}catch(e){}
+const d3=c=>[c%3,(c/3|0)%3,(c/9|0)%3,(c/27|0)%3,(c/81|0)%3],fbOf=(g,a)=>d3(pcode(PE[g],PE[a]));
+function gsave(){try{localStorage.setItem(GK,JSON.stringify({a:GS.a,r:GS.r.map(x=>x.w),d:GS.d}))}catch(e){}}
+function game(nw){if(!nA){GS=null;render3();return}
+ if(nw||!GS){let d=null;if(!nw)try{d=JSON.parse(localStorage.getItem(GK))}catch(e){}
+  if(d&&pidx.has(d.a)){GS={a:d.a,r:[],d:d.d};d.r.forEach(w=>{if(pidx.has(w))GS.r.push({w,i:pidx.get(w),fb:fbOf(pidx.get(w),pidx.get(d.a))})})}else GS={a:P[Math.floor(Math.random()*nA)],r:[],d:0};
+  buf=[];gsave()}
+ render3()}
+$('anim').checked=!RED;if(document.body)document.body.classList.toggle('noanim',RED);
+$('anim').onchange=e=>{RED=!e.target.checked;if(document.body)document.body.classList.toggle('noanim',RED);try{localStorage.setItem(ANK,RED?'0':'1')}catch(x){}};
+const WIN=['Genijalno 🤯','Veličanstveno 🤩','Impresivno 😎','Sjajno 😀','Odlično 🙂','Uf! 😅'];
+function toast(t,ms){const e=$('toast');e.textContent=t;e.className='on';clearTimeout(toast.t);toast.t=setTimeout(()=>{e.className=''},ms||1600)}
+$('help').onclick=()=>toast('Klikni pločice za promjenu boje. Strelice listaju poteze.',2800);$('gear').onclick=()=>{$('ls').open=true;$('ls').scrollIntoView({behavior:'smooth'})};
+function render3(){const g=$('gg');
+ if(!GS){g.innerHTML='<span class="mute">Prvo učitaj popis riječi (Postavke).</span>';$('kb').innerHTML='';$('gr').style.display='none';$('ga').style.display='none';return}
+ const ks={};GS.r.slice(0,busy?GS.r.length-1:GS.r.length).forEach(r=>[...r.w].forEach((c,i)=>ks[c]=Math.max(ks[c]===undefined?-1:ks[c],r.fb[i])));
+ let h='';for(let y=0;y<6;y++){const r=GS.r[y],cr=y===GS.r.length;h+=`<div class="row${y===shakeY?' shake':''}">`+[0,1,2,3,4].map(i=>{const dg=r?'ǆǉǌ'.includes(r.w[i]):cr&&buf[i]&&'ǆǉǌ'.includes(buf[i]),an=r&&y===flipY?`style="animation-delay:${i*.3}s"`:r&&y===bounceY?`style="animation-delay:${i*.1}s"`:'';
+  return r?`<div class="t c${r.fb[i]}${dg?' d':''}${y===flipY?' flip':''}${y===bounceY?' bounce':''}" ${an}>${sh(r.w[i])}</div>`:`<div class="t e${cr&&buf[i]?' f':''}${dg?' d':''}${cr&&i===popI?' pop':''}">${cr&&buf[i]?sh(buf[i]):''}</div>`}).join('')+'</div>'}
+ shakeY=-1;popI=-1;bounceY=-1;g.innerHTML=h;
+ const fin=GS.d&&!busy,r=$('gr');
+ $('kb').innerHTML=fin?'':['ertzuiopšđǆ','asdfghjklčć','⏎cvbnǌmžǉ⌫'].map(l=>'<div class="kr">'+[...l].map(c=>`<button class="k${ks[c]!==undefined?' s'+ks[c]:''}" data-k="${c}">${c==='⏎'?'Enter':sh(c)}</button>`).join('')+'</div>').join('');
+ r.style.display=fin?'':'none';$('gu').style.display=GS.d?'none':'';$('ga').style.display=fin?'':'none';
+ if(fin)r.innerHTML=`<p><b>${GS.d===1?'Pogodio si u '+GS.r.length+'/6!':'Rješenje: '+dsp(GS.a)}</b></p><pre>${GS.r.map(x=>x.fb.map(v=>['⬛','🟨','🟩'][v]).join('')).join('\n')}</pre>`}
+function confetti(){if(RED)return;const c=$('fx'),x=c.getContext('2d'),cols=['#6aaa64','#c9b458','#6b9bff','#ffffff','#ff7a90'];c.width=innerWidth;c.height=innerHeight;
+ const ps=Array.from({length:150},(_,k)=>({x:innerWidth*(k%2?.3:.7),y:innerHeight*.6,vx:(Math.random()-.5)*16,vy:-Math.random()*15-5,s:5+Math.random()*5,r:Math.random()*6,vr:(Math.random()-.5)*.4,c:cols[Math.random()*5|0],l:1}));let t=0;
+ (function f(){x.clearRect(0,0,c.width,c.height);ps.forEach(p=>{p.vy+=.35;p.x+=p.vx;p.y+=p.vy;p.vx*=.99;p.r+=p.vr;p.l-=.006;if(p.l>0){x.save();x.globalAlpha=p.l;x.translate(p.x,p.y);x.rotate(p.r);x.fillStyle=p.c;x.fillRect(-p.s/2,-p.s/2,p.s,p.s*.6);x.restore()}});if(++t<200)requestAnimationFrame(f);else x.clearRect(0,0,c.width,c.height)})()}
+function key(c){if(!GS||GS.d||busy)return;$('gm').textContent='';
+ if(c==='⌫')buf.pop();else if(c==='⏎'){if(buf.length<5){toast('Premalo slova');shakeY=GS.r.length}else{const w=buf.join('');if(!pidx.has(w)){toast('Nije na popisu riječi');shakeY=GS.r.length}else{const i=pidx.get(w),g=GS;GS.r.push({w,i,fb:fbOf(i,pidx.get(GS.a))});buf=[];GS.d=w===GS.a?1:GS.r.length>=6?2:0;gsave();flipY=GS.r.length-1;busy=true;render3();
+  setTimeout(()=>{busy=false;flipY=-1;if(g!==GS)return;if(GS.d===1){bounceY=GS.r.length-1;toast(WIN[GS.r.length-1],2000)}else if(GS.d===2)toast('Rješenje: '+dsp(GS.a),3000);render3()},RED?0:1900);return}}}
+ else if(buf.length<5){buf.push(c);popI=buf.length-1}
+ render3()}
+function analyze(){rows=GS.r.map(r=>({w:r.w,i:pidx.get(r.w),fb:[...r.fb]}));cur=0;tab(1);render()}
+$('kb').onclick=e=>{const b=e.target.closest('[data-k]');if(b)key(b.dataset.k)};
+$('ga').onclick=analyze;$('gn').onclick=()=>game(1);$('gu').onclick=()=>{if(GS&&!GS.d){GS.d=3;gsave();render3();toast('Rješenje: '+dsp(GS.a),3000)}};
+document.addEventListener('keydown',e=>{if($('v3').style.display==='none'||!GS||/INPUT|TEXTAREA/.test(document.activeElement.tagName)||e.ctrlKey||e.metaKey||e.altKey)return;let k=e.key.toLowerCase(),l=buf[buf.length-1];
+ if(k==='enter')k='⏎';else if(k==='backspace')k='⌫';else if(k==='j'&&(l==='l'||l==='n')){buf[buf.length-1]=l==='l'?'ǉ':'ǌ';e.preventDefault();render3();return}else if(k==='ž'&&l==='d'){buf[buf.length-1]='ǆ';e.preventDefault();render3();return}else if(k.length!==1||!AL.includes(k))return;
+ e.preventDefault();key(k)});
+$('cl').onclick=async()=>{const u=location.href.split('#')[0]+'#g='+encodeURIComponent(rows.map(r=>r.w+'.'+fbc(r.fb)).join('~'));try{await navigator.clipboard.writeText(u);$('cl').textContent='Kopirano!'}catch(e){prompt('Kopiraj poveznicu:',u)}setTimeout(()=>$('cl').textContent='Kopiraj poveznicu',2500)};
+function linkOpen(){const m=/^#g=(.+)$/.exec(location.hash);if(!m)return;let rs;try{rs=decodeURIComponent(m[1]).split('~').map(s=>s.split('.'))}catch(e){return}
+ const b=$('lk');b.style.display='';b.innerHTML='<b>Poveznica sadrži cijelu igru, uključujući riječi (spojler).</b> Prikazati je?<div class="in"><button class="p" id="ly">Prikaži</button><button id="ln">Ne</button></div>';
+ $('ln').onclick=()=>b.style.display='none';
+ $('ly').onclick=()=>{if(!nA){b.innerHTML='Prvo učitaj popis riječi u Postavkama, pa ponovno otvori poveznicu.';return}b.style.display='none';rows=rs.filter(x=>pidx.has(x[0])).map(x=>({w:x[0],i:pidx.get(x[0]),fb:d3(+x[1])}));cur=0;tab(1);render()}}
+let TS=null;const dsw=i=>dsp(P[i]),pat=c=>`<span class="pt">${d3(c).map(v=>`<i class="c${v}"></i>`).join('')}</span>`;
+function treeSets(){const keys=['k|'],sets=[Array.from({length:nC},(_,i)=>i)];TS.c.forEach((c,k)=>{const g=TS.g[k];sets.push(sets[k].filter(a=>pcode(PE[g],PE[a])===c));keys.push(keys[k]+P[g]+c+'|')});return{sets,keys}}
+function renderTree(){const o=$('open'),k0=cache.get('k|');
+ if(!nC||!k0||!k0.all){o.innerHTML='<span class="mute">Učitaj popis riječi.</span>';return}
+ if(!TS){o.innerHTML='<p class="mute">Odaberi početnu riječ i istraži što se događa za svaki mogući ishod.</p><div class="chips" style="max-height:none">'+k0.all.slice(0,10).map((s,i)=>`<span data-a="r" data-v="${s[2]}">${i+1}. ${dsw(s[2])} · ${s[3].toFixed(2)}</span>`).join('')+'</div>'+(rows.length?`<p class="mute">Tvoja prva riječ ${dsp(rows[0].w)} je ${k0.all.findIndex(s=>s[2]===rows[0].i)+1}. od ${P.length} (${k0.all.find(s=>s[2]===rows[0].i)[3].toFixed(2)} bita).</p>`:'');return}
+ const{sets,keys}=treeSets(),k=TS.c.length,C=sets[k],N=C.length,pend=TS.g.length>k;
+ let h='<div class="chips" style="max-height:none;margin-bottom:10px"><span data-a="back">◀ Riječi</span>'+TS.g.map((g,j)=>`<span data-a="b" data-v="${j}"${j===k?' class="on"':''}>${dsw(g)}</span>`+(j<k?`<span>${pat(TS.c[j])}</span>`:'')).join('')+'</div>';
+ if(pend){const g=TS.g[k],b=best(C,keys[k]),m=new Map();C.forEach(a=>{const p=pcode(PE[g],PE[a]);if(!m.has(p))m.set(p,[]);m.get(p).push(a)});
+  const L=[...m].sort((x,y)=>y[1].length-x[1].length),mx=L[0][1].length,tp=b.top.slice(0,4).map(s=>s[2]);if(!tp.includes(g))tp.push(g);
+  h+=`<p><b>${N}</b> mogućih riječi</p><p class="mute">Motor preferira: ${tp.map((x,i)=>`<span class="lnk${x===g?' on':''}" data-a="w" data-v="${x}">${dsw(x)}</span>`).join('')}</p><div>`+(TS.more?L:L.slice(0,10)).map(([p,l])=>p===242?`<div class="or"><span>${pat(p)}</span><span>✔ pogodak</span><b>1</b></div>`:`<div class="or" data-a="o" data-v="${p}">${pat(p)}<div class="bb" style="width:${Math.max(3,l.length/mx*100)}%"></div><b>${l.length}</b><div class="ex">${l.slice(0,3).map(dsw).join(', ')}${l.length>3?' …':''}</div></div>`).join('')+'</div>'+(L.length>10&&!TS.more?`<p class="lnk mute" data-a="more">Prikaži još ${L.length-10} ishoda</p>`:'')}
+ else{h+=N===0?'<p>Nema kandidata.</p>':N===1?`<p><b>Rješenje: ${dsw(C[0])}</b></p>`:`<p>Preostale riječi: <b>${C.map(dsw).join(', ')}</b></p><p class="mute">Zajamčeni završetak: u najviše ${exactSolve(C).k} pokušaja.</p>`}
+ if(k>0)h+='<div class="in"><button class="p" data-a="an">Otvori u analizi</button></div>';
+ o.innerHTML=h}
+$('open').onclick=e=>{const b=e.target.closest('[data-a]');if(!b||!nC)return;const a=b.dataset.a,v=+b.dataset.v;
+ if(a==='r')TS={g:[v],c:[]};else if(a==='back')TS=null;else if(a==='b')TS={g:TS.g.slice(0,v+1),c:TS.c.slice(0,v)};
+ else if(a==='w')TS.g[TS.g.length-1]=v;else if(a==='more')TS.more=true;
+ else if(a==='o'){const{sets,keys}=treeSets(),k=TS.c.length,g=TS.g[k],C2=sets[k].filter(x=>pcode(PE[g],PE[x])===v);TS.c.push(v);TS.more=false;if(C2.length>2)TS.g.push(best(C2,keys[k]+P[g]+v+'|').top[0][2])}
+ else if(a==='an'){rows=TS.c.map((c,j)=>({w:P[TS.g[j]],i:TS.g[j],fb:d3(c)}));cur=0;tab(1);render();return}
+ renderTree()};
+let MT=null;const COLW=170,MC=[58,58,60],MG=[83,141,78],MY=[181,159,59];
+const mcol=c=>{if(c==null)return'rgb(58,58,60)';const v=d3(c),g=v.filter(x=>x===2).length,y=v.filter(x=>x===1).length,n=(g+y)/5;return'rgb('+[0,1,2].map(i=>Math.round(MC[i]*(1-n)+(g*MG[i]+y*MY[i])/5)).join(',')+')'};
+const mnode=(C,par,c,key)=>({C,par,c,key,d:par?par.d+1:0,g:null,kids:null,y:0,h:0});
+function mexp(n){if(n.kids||n.C.length<2)return;if(n.g==null)n.g=n.C.length>2?best(n.C,n.key).top[0][2]:n.C[0];const m=new Map();n.C.forEach(a=>{const p=pcode(PE[n.g],PE[a]);if(!m.has(p))m.set(p,[]);m.get(p).push(a)});n.kids=[...m].sort((a,b)=>b[1].length-a[1].length).map(([p,l])=>mnode(l,n,p,n.key+P[n.g]+p+'|'))}
+function mlay(n,y){n.y=y;n.h=n.C.length*MT.u;let yy=y;if(n.kids)n.kids.forEach(k=>{mlay(k,yy);yy+=k.h})}
+const mxs=()=>Math.min(1.7,Math.max(.55,Math.sqrt(MT.v.s/MT.s0)));
+function mdraw(){const c=$('mc'),x=c.getContext('2d'),dpr=devicePixelRatio||1,W=c.clientWidth,H=c.clientHeight;if(c.width!==W*dpr||c.height!==H*dpr){c.width=W*dpr;c.height=H*dpr}
+ x.setTransform(dpr,0,0,dpr,0,0);x.clearRect(0,0,W,H);const v=MT.v,xs=mxs();
+ (function f(n){const sx=n.d*COLW*xs+v.x,sy=n.y*v.s+v.y,sh=n.h*v.s,sw=(COLW-3)*xs;if(sy>H||sy+sh<0||sx>W)return;
+  if(sh>=.5&&sx+sw>0){x.fillStyle=mcol(n.c);x.fillRect(sx,sy,sw,Math.max(sh-(sh>3?1:0),.5));
+   if(MT.sel===n){x.strokeStyle='#fff';x.lineWidth=2;x.strokeRect(sx+1,sy+1,sw-2,Math.max(sh-2,1))}
+   if(sh>=14&&sw>46){x.fillStyle='#d7dadc';x.font='bold '+Math.min(15,sh*.55)+'px Helvetica,Arial';x.textBaseline='middle';x.textAlign='left';const w=n.C.length===1?dsw(n.C[0]):n.kids?dsw(n.g):'';x.fillText(n.C.length+(w?'  '+w:''),sx+6,sy+Math.min(sh/2,16))}
+   if(n.c!=null&&sh>=22&&sw>110){const q=Math.min(10,sh*.35);d3(n.c).forEach((s,i)=>{x.fillStyle=s===2?'#538d4e':s===1?'#b59f3b':'#3a3a3c';x.fillRect(sx+sw-6-(5-i)*(q+2),sy+4,q,q)})}}
+  if(n.kids)n.kids.forEach(f)})(MT.root)}
+function mfit(){const c=$('mc');MT.s0=c.clientHeight/1020;MT.v={s:MT.s0,x:8,y:8}}
+function mhit(mx,my){const v=MT.v,ly=(my-v.y)/v.s,lx=(mx-v.x)/mxs(),d=Math.floor(lx/COLW);let n=MT.root;if(lx<0||ly<0||ly>n.h)return null;while(n.d<d){if(!n.kids)return null;n=n.kids.find(k=>ly>=k.y&&ly<k.y+k.h);if(!n)return null}return n}
+function msel(n){MT.sel=n;if(n&&!n.kids&&n.C.length>1){mexp(n);mlay(MT.root,0)}mdraw();minfo()}
+function mzoom(f,mx,my){const v=MT.v,ns=Math.min(MT.s0*400,Math.max(MT.s0*.6,v.s*f)),r=ns/v.s,xo=mxs();v.y=my-(my-v.y)*r;v.s=ns;const xn=mxs();v.x=mx-(mx-v.x)*(xn/xo);mdraw()}
+function minfo(){const n=MT.sel,o=$('mi');if(!n){o.innerHTML='<span class="mute">Klikni blok za detalje i grananje. Dvaput klikni za zumiranje. Povuci za pomicanje, kotačić za zumiranje.</span>';return}
+ const path=[];for(let a=n;a.par;a=a.par)path.unshift(a);const N=n.C.length;
+ let h='<div class="chips" style="max-height:none;margin-bottom:8px"><span>'+dsw(MT.root.g)+'</span>'+path.map(a=>`<span>${pat(a.c)}</span>`+(a.g!=null?`<span>${dsw(a.g)}</span>`:'')).join('')+'</div>';
+ h+=`<p><b>${N}</b> ${N===1?'riječ':'mogućih riječi'}${n.g!=null&&n.kids?' · sljedeća riječ: <b>'+dsw(n.g)+'</b>':''}</p>`;
+ if(N>2&&n.g!=null){const tp=best(n.C,n.key).top.slice(0,4).map(s=>s[2]);if(!tp.includes(n.g))tp.push(n.g);h+='<p class="mute">Motor preferira: '+tp.map(x=>`<span class="lnk${x===n.g?' on':''}" data-m="alt" data-v="${x}">${dsw(x)}</span>`).join('')+'</p>'}
+ h+=`<p class="mute">${n.C.slice(0,40).map(dsw).join(', ')}${N>40?' … +'+(N-40):''}</p>`;
+ if(N>=2&&N<=30)h+=`<p class="mute">Zajamčeni završetak: u najviše ${exactSolve(n.C).k} pokušaja.</p>`;
+ if(path.length)h+='<div class="in"><button class="p" data-m="an">Otvori u analizi</button></div>';o.innerHTML=h}
+function renderMap(){const k0=cache.get('k|'),e=$('mentry');if(MT)return;$('mwrap').style.display='none';e.style.display='';
+ if(!nC||!k0||!k0.all){e.innerHTML='<span class="mute">Učitaj popis riječi.</span>';return}
+ e.innerHTML='<p class="mute">Odaberi početnu riječ. Karta prikazuje sve ishode odjednom: visina bloka je broj preostalih riječi.</p><div class="chips" style="max-height:none">'+k0.all.slice(0,10).map((s,i)=>`<span data-m="mr" data-v="${s[2]}">${i+1}. ${dsw(s[2])} · ${s[3].toFixed(2)}</span>`).join('')+'</div>'}
+$('mapv').onclick=e=>{const b=e.target.closest('[data-m]');if(!b||!nC)return;const a=b.dataset.m,v=+b.dataset.v;
+ if(a==='mr'){MT={root:mnode(Array.from({length:nC},(_,i)=>i),null,null,'k|'),u:1000/nC,sel:null};MT.root.g=v;mexp(MT.root);mlay(MT.root,0);$('mentry').style.display='none';$('mwrap').style.display='';mfit();mdraw();minfo();return}
+ if(!MT)return;const c=$('mc');
+ if(a==='back'){MT=null;renderMap()}
+ else if(a==='fit'){mfit();mdraw()}else if(a==='z+')mzoom(1.5,c.clientWidth/2,c.clientHeight/2);else if(a==='z-')mzoom(1/1.5,c.clientWidth/2,c.clientHeight/2);
+ else if(a==='lvl'){$('mi').innerHTML='<span class="mute">Računam…</span>';setTimeout(()=>{const L=[];(function f(n){if(n.kids)n.kids.forEach(f);else if(n.C.length>1)L.push(n)})(MT.root);L.forEach(mexp);mlay(MT.root,0);mdraw();minfo()},30)}
+ else if(a==='alt'){const n=MT.sel;n.g=v;n.kids=null;mexp(n);mlay(MT.root,0);mdraw();minfo()}
+ else if(a==='an'){const p=[];for(let n=MT.sel;n.par;n=n.par)p.unshift(n);rows=p.map(n=>({w:P[n.par.g],i:n.par.g,fb:d3(n.c)}));cur=0;tab(1);render()}};
+(()=>{const c=$('mc');let dr=null;
+ c.addEventListener('mousedown',e=>{if(e.button===1)e.preventDefault()});c.addEventListener('auxclick',e=>e.preventDefault());
+ c.addEventListener('pointerdown',e=>{if(!MT||e.button>1)return;if(e.button===1)e.preventDefault();dr={x:e.clientX,y:e.clientY,m:0,b:e.button};c.setPointerCapture(e.pointerId)});
+ c.addEventListener('pointermove',e=>{if(!dr||!MT)return;const dx=e.clientX-dr.x,dy=e.clientY-dr.y;dr.m+=Math.abs(dx)+Math.abs(dy);dr.x=e.clientX;dr.y=e.clientY;MT.v.x+=dx;MT.v.y+=dy;mdraw()});
+ c.addEventListener('pointerup',e=>{if(!dr||!MT)return;const m=dr.m,b=dr.b;dr=null;if(m<6&&b===0){const r=c.getBoundingClientRect();msel(mhit(e.clientX-r.left,e.clientY-r.top))}});
+ c.addEventListener('wheel',e=>{if(!MT)return;e.preventDefault();const r=c.getBoundingClientRect();mzoom(Math.exp(-e.deltaY*.0015),e.clientX-r.left,e.clientY-r.top)},{passive:false});
+ c.addEventListener('dblclick',e=>{if(!MT)return;const r=c.getBoundingClientRect(),n=mhit(e.clientX-r.left,e.clientY-r.top);if(!n)return;const H=c.clientHeight,W=c.clientWidth,v=MT.v;v.s=Math.min(MT.s0*60,H*.9/n.h);v.y=H/2-(n.y+n.h/2)*v.s;v.x=W*.08-n.d*COLW*mxs();mdraw()});
+ addEventListener('resize',()=>{if(MT)mdraw()})})();
+$('vm').onclick=()=>{$('mapv').style.display='';$('open').style.display='none';$('vm').className='on';$('vl').className='';if(MT)mdraw()};
+$('vl').onclick=()=>{$('mapv').style.display='none';$('open').style.display='';$('vl').className='on';$('vm').className='';renderTree()};
 const memo=new Map();
 function solve(C,full){if(C.length<2)return C.length;const key=(full?'F':'c')+C.join(',');let v=memo.get(key);if(v)return v;v=99;const pool=full?P.map((_,i)=>i):C;for(const g of pool){const w=worst(g,C);if(w<v)v=w}memo.set(key,v);return v}
 function worst(g,C){const m=new Map(),G=PE[g];for(const a of C){const p=pcode(G,PE[a]);let l=m.get(p);if(!l)m.set(p,l=[]);l.push(a)}let w=0;for(const[p,l]of m){if(p===242)continue;if(l.length===C.length)return 99;w=Math.max(w,solve(l,false))}return 1+w}
 function exactSolve(C){const k=solve(C,true),S=new Set(C),w=[];for(let g=0;g<P.length;g++)if(worst(g,C)===k)w.push(g);w.sort((a,b)=>S.has(b)-S.has(a));return{k,w:w.slice(0,5)}}
-function extra(sets,C,N,acc,lab){
- const pts=sets.map(s=>s.length?Math.log2(s.length):0),mx=Math.log2(Math.max(2,nA)),W=320,H=110,X=i=>20+i*(W-30)/Math.max(1,pts.length-1),Y=b=>8+(1-b/mx)*(H-24);
- $('graph').innerHTML=pts.length<2?'<span class="mute">Graf se pojavljuje nakon prvog pokušaja.</span>':`<svg viewBox="0 0 ${W} ${H}" style="width:100%;max-width:520px"><polyline fill="none" stroke="var(--acc)" stroke-width="2" points="${pts.map((b,i)=>X(i)+','+Y(b)).join(' ')}"/>${pts.map((b,i)=>`<circle cx="${X(i)}" cy="${Y(b)}" r="3.5" fill="var(--acc)"><title>${i?'Pokušaj '+i+': ':'Početak: '}${sets[i].length} riječi, ${b.toFixed(1)} bita</title></circle><text x="${X(i)}" y="${H-4}" font-size="9" text-anchor="middle" fill="var(--mute)">${i}</text>`).join('')}</svg><div class="mute">Preostala neizvjesnost u bitima nakon svakog pokušaja (0 je početak). Veći pad znači bolji potez.</div>`;
+function extra(sets,C,N,acc,lab,luck,n){
+ const pts=sets.map(s=>s.length?Math.log2(s.length):0),mx=Math.log2(Math.max(2,nC)),W=320,H=110,X=i=>20+i*(W-30)/Math.max(1,pts.length-1),Y=b=>22+(1-b/mx)*(H-40);
+ $('graph').innerHTML=pts.length<2?'<span class="mute">Graf se pojavljuje nakon prvog pokušaja.</span>':`<svg viewBox="0 0 ${W} ${H}" style="width:100%;max-width:520px"><polyline fill="none" stroke="var(--acc)" stroke-width="2" points="${pts.map((b,i)=>X(i)+','+Y(b)).join(' ')}"/>${cur<pts.length-1?`<line x1="${X(cur)}" y1="${Y(pts[cur])}" x2="${X(cur+1)}" y2="${Y(pts[cur+1])}" stroke="var(--ink)" stroke-width="4" stroke-linecap="round"/>`:''}<circle cx="${X(Math.min(cur+1,pts.length-1))}" cy="${Y(pts[Math.min(cur+1,pts.length-1)])}" r="8" fill="none" stroke="var(--ink)" stroke-width="1.5"/>${pts.map((b,i)=>`<circle data-i="${i}" cx="${X(i)}" cy="${Y(b)}" r="9" fill="transparent" style="cursor:pointer"/><circle cx="${X(i)}" cy="${Y(b)}" r="3.5" fill="var(--acc)" style="pointer-events:none"><title>${i?'Pokušaj '+i+': ':'Početak: '}${sets[i].length} riječi, ${b.toFixed(1)} bita</title></circle><text x="${X(i)}" y="${Y(b)-10}" font-size="10" font-weight="700" text-anchor="middle" fill="var(--ink)" style="pointer-events:none">${sets[i].length}</text><text x="${X(i)}" y="${H-4}" font-size="9" text-anchor="middle" fill="var(--mute)">${i}</text>`).join('')}</svg><div class="mute">Visina točke je preostala neizvjesnost u bitima, broj iznad je broj preostalih riječi (0 je početak). Osvijetljena crta je odabrani potez. Klikni točku da odabereš potez s tim brojem.</div>`;
+ const pct=n?Math.round(acc.reduce((a,b)=>a+b,0)/acc.length*100):0,lw=luck>2?'vrlo sretan':luck>.7?'malo sretan':luck<-2?'vrlo nesretan':luck<-.7?'malo nesretan':'prosječno';
+ $('sum').innerHTML=n?`<b>Točnost ${pct}%</b> · Sreća <b>${luck>=0?'+':''}${luck.toFixed(1)} bita</b> (${lw})`:'';
  const ex=$('exact');ex.innerHTML='';
- if(N>=2&&N<=30){const r=exactSolve(C);if(r.k<99)ex.innerHTML=`<b>Zajamčeni završetak:</b> rješenje u najviše <b>${r.k}</b> ${r.k<5?'pokušaja':'pokušaja'} s pokušajem ${r.w.map(i=>dsp(P[i])).join(', ')}.`}
+ if(N>=2&&N<=30){const r=exactSolve(C);if(r.k<99)ex.innerHTML=`<b>Zajamčeni završetak:</b> rješenje u najviše <b>${r.k}</b> pokušaja s pokušajem ${r.w.map(i=>dsp(P[i])).join(', ')}.`}
  const z=sets.findIndex(s=>!s.length);if(z>0){const t=$('tg'+(z-1));if(t){t.className='tag';t.style.color='#d9534f';t.textContent='Nemoguće boje'}}
  const k0=cache.get('k|');
- $('open').innerHTML=k0&&k0.all?`<div class="chips">${k0.all.slice(0,10).map((s,i)=>`<span>${i+1}. ${dsp(P[s[2]])} · ${s[3].toFixed(2)}</span>`).join('')}</div>`+(rows.length?`<p class="mute">Tvoja prva riječ ${dsp(rows[0].w)} je ${k0.all.findIndex(s=>s[2]===rows[0].i)+1}. od ${P.length} (${k0.all.find(s=>s[2]===rows[0].i)[3].toFixed(2)} bita).</p>`:''):'<span class="mute">Učitaj popis riječi.</span>';
- if(!rows.length){$('shw').style.display='none';return}
- const em=['⬛','🟨','🟩'],won=rows[rows.length-1].fb.every(x=>x===2),pct=Math.round(acc.reduce((a,b)=>a+b,0)/acc.length*100),cnt={};lab.forEach(l=>cnt[l]=(cnt[l]||0)+1);
- $('sh').textContent=`wordle.hr engine · točnost ${pct}% · ${won?rows.length:'X'}/6\n\n`+rows.map(r=>r.fb.map(x=>em[x]).join('')).join('\n')+'\n\n'+Object.entries(cnt).map(([k,v])=>k+' ×'+v).join(' · ');$('shw').style.display=''}
+ renderTree();renderMap();
+ if(!n){$('shw').style.display='none';return}
+ const em=['⬛','🟨','🟩'],won=rows[n-1].fb.every(x=>x===2),cnt={};lab.forEach(l=>cnt[l]=(cnt[l]||0)+1);
+ $('sh').textContent=`wordle.hr engine · točnost ${pct}% · ${won?n:'X'}/6\n\n`+rows.map(r=>r.fb.map(x=>em[x]).join('')).join('\n')+'\n\n'+Object.entries(cnt).map(([k,v])=>k+' ×'+v).join(' · ');$('shw').style.display=''}
 $('cp').onclick=async()=>{const b=$('cp');try{await navigator.clipboard.writeText($('sh').textContent);b.textContent='Kopirano!'}catch(e){const r=document.createRange();r.selectNodeContents($('sh'));const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Označeno, kopiraj ručno'}setTimeout(()=>b.textContent='Kopiraj rezultat',2500)};
-function add(){const w=dg($('w').value.trim());if(!RX.test(w)){$('w').focus();return}if(!pidx.has(w)){$('msg').textContent=P.length?'Nije na popisu riječi':'Prvo učitaj popis riječi iz datoteke main.….js';return}$('msg').textContent='';rows.push({w,i:pidx.get(w),fb:[0,0,0,0,0]});$('w').value='';render()}
+function add(){const w=dg($('w').value.trim());if(!RX.test(w)){$('w').focus();return}if(!pidx.has(w)){$('msg').textContent=P.length?'Nije na popisu riječi':'Prvo učitaj popis riječi iz datoteke main.….js';return}$('msg').textContent='';rows.push({w,i:pidx.get(w),fb:[0,0,0,0,0]});cur=rows.length;$('w').value='';render()}
 $('add').onclick=add;$('w').onkeydown=e=>{if(e.key==='Enter')add()};
-$('undo').onclick=()=>{rows.pop();render()};$('reset').onclick=()=>{rows=[];render()};
+$('undo').onclick=()=>{rows.pop();cur=Math.min(cur,rows.length);render()};$('reset').onclick=()=>{rows=[];cur=0;render()};
 $('board').onclick=e=>{const t=e.target.closest('.t');if(!t)return;const r=rows[+t.dataset.r],i=+t.dataset.i;r.fb[i]=(r.fb[i]+1)%3;render()};
 $('sug').onclick=e=>{if(e.target.dataset.w){$('w').value=dsp(e.target.dataset.w);$('w').focus()}};
 let BIG=[];
 const LS3='wordlehr.big3',idb=(m,v)=>new Promise(res=>{try{const q=indexedDB.open('wordlehr',1);q.onupgradeneeded=()=>q.result.createObjectStore('s');q.onerror=()=>res(null);q.onsuccess=()=>{const st=q.result.transaction('s',m==='get'?'readonly':'readwrite').objectStore('s'),r=m==='get'?st.get('d'):st.put(v,'d');r.onsuccess=()=>res(r.result||true);r.onerror=()=>res(null)}}catch(e){res(null)}});
-function useRun(k,restored){const all=k==='all';setLists(all?[...new Set([].concat(...BIG))]:BIG[k],all?[]:[].concat(...BIG.filter((_,j)=>j!==k)),false);const im=$('imsg');im.textContent=nA?`${restored?'Učitano iz spremljenog popisa':'Učitano'}: ${nA} rješenja i ${P.length-nA} dodatnih riječi.`:'Nisam dobio valjane riječi.';
- if(restored||!nA)return;const d={big:BIG,sel:k};let ok=0;try{localStorage.setItem(LS3,JSON.stringify(d));ok=1}catch(e){}idb('put',d).then(r=>{im.textContent+=(ok||r)?' Spremljeno za sljedeći put.':' Spremanje nije uspjelo u ovom pregledniku.'})}
-function fillSel(k){$('sel').innerHTML=`<option value="all"${k==='all'?' selected':''}>Oba popisa: sve su moguća rješenja</option>`+BIG.map((r,j)=>`<option value="${j}"${j===k?' selected':''}>Popis ${j+1}: ${r.length} riječi (${r.slice(0,3).map(dsp).join(', ')})</option>`).join('');$('sel').style.display=BIG.length?'':'none'}
-$('sel').onchange=e=>useRun(e.target.value==='all'?'all':+e.target.value);
-function noc(sets){const z=sets.findIndex(s=>!s.length);let alt=P.map((_,i)=>i);rows.forEach(r=>{const c=fbc(r.fb),G=PE[r.i];alt=alt.filter(a=>pcode(G,PE[a])===c)});return `<b>Nema kandidata</b> među rješenjima${z>0?' nakon pokušaja '+z:''}. <span class="mute">Među svim dopuštenim riječima: ${alt.length?alt.slice(0,12).map(i=>dsp(P[i])).join(', ')+(alt.length>12?' …':''):'ništa'}.</span>`}
+function applyMode(restored){setLists(BIG[0],[].concat(...BIG.slice(1)),false);$('imsg').textContent=nA?`${restored?'Učitano iz spremljenog popisa':'Učitano'}: ${nA} rješenja i ${P.length-nA} dodatnih riječi.`:'Nisam dobio valjane riječi.';if(!restored&&nA)save()}
+function save(){const d={big:BIG};let ok=0;try{localStorage.setItem(LS3,JSON.stringify(d));ok=1}catch(e){}idb('put',d).then(r=>{$('imsg').textContent+=(ok||r)?' Spremljeno za sljedeći put.':' Spremanje nije uspjelo u ovom pregledniku.'})}
+function noc(sets){const z=sets.findIndex(s=>!s.length);return `<b>Nema kandidata</b>${z>0?' nakon pokušaja '+z:''}. <span class="mute">Provjeri boje u tom redu.</span>`}
 function dec(s){return s.replace(/\\u([0-9a-fA-F]{4})|\\x([0-9a-fA-F]{2})|\\([\s\S])/g,(m,u,x,c)=>u?String.fromCharCode(parseInt(u,16)):x?String.fromCharCode(parseInt(x,16)):c)}
 $('f').onchange=async e=>{const f=e.target.files[0];if(!f)return;const t=await f.text(),re=/"((?:[^"\\\n]|\\.)*)"|'((?:[^'\\\n]|\\.)*)'/g,runs=[];let m,cur=null,end=0,n=0,ok=0;
  while(m=re.exec(t)){n++;const w=dec(m[1]!==undefined?m[1]:m[2]);if(RX.test(w.toLowerCase().normalize('NFC')))ok++;
   if(cur&&/^\s*,\s*$/.test(t.slice(end,m.index)))cur.push(w);else{cur=[w];runs.push(cur)}end=re.lastIndex}
  const big=runs.filter(r=>r.length>500),im=$('imsg');
  if(!big.length){im.textContent=`Nisam našao popise. Datoteka ${Math.round(t.length/1024)} KB, ${n} nizova znakova, ${ok} petoslovnih riječi, najduži popis ${Math.max(0,...runs.map(r=>r.length))}.`;return}
- BIG=big.map(r=>clean(r,1));fillSel('all');useRun('all')};
+ BIG=big.map(r=>clean(r,1));applyMode()};
 $('apply').onclick=()=>setLists(clean($('list').value.split(/[\s,;]+/)),[],true);
-$('def').onclick=()=>{try{localStorage.removeItem(LS3)}catch(e){}idb('put',{});BIG=[];fillSel('all');$('imsg').textContent='Spremljeni popisi su obrisani.';setLists([],[],false)};
+$('def').onclick=()=>{try{localStorage.removeItem(LS3)}catch(e){}idb('put',{});BIG=[];$('imsg').textContent='Spremljeni popisi su obrisani.';setLists([],[],false)};
 (async()=>{let d=null;try{d=JSON.parse(localStorage.getItem(LS3))}catch(e){}if(!d||!d.big)d=await idb('get');
- if(d&&d.big&&d.big.length){BIG=d.big;fillSel(d.sel);useRun(d.sel,1)}else{setLists([],[],false);$('f').closest('details').open=true}})();
+ if(d&&d.big&&d.big.length){BIG=d.big;applyMode(1)}else{setLists([],[],false);$('f').closest('details').open=true}})().then(linkOpen);
 </script>
 </body>
 </html>

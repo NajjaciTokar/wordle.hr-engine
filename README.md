@@ -29,14 +29,16 @@ When wordle.hr publishes a new script version, repeat the steps to refresh the l
 
 - Type a guess (`lj`, `nj` and `dž` are single tiles, as on wordle.hr) and press Dodaj.
 - Click a tile to cycle grey, yellow, green so it matches what the game showed you.
-- The dropdown under the file picker chooses which list counts as possible answers. The first list is the real answer list,
-  so pick that one for the most accurate review. "Oba popisa" treats every accepted word as a possible answer.
+- In Analiza, every word from both lists counts as a possible answer. In Igra, the secret word is drawn only from the first list (the real answer list).
 
-## Publish with GitHub Pages
+## Igra and links
 
-1. Create a new repository on GitHub and upload `index.html` and `README.md` (the `.gitignore` is optional).
-2. Go to Settings, then Pages, set the source to the `main` branch and the `/ (root)` folder, and save.
-3. Your page will be live at `https://<your-username>.github.io/<repo-name>/`.
+- **Igra** is a practice game with an on-screen keyboard (6 tries, secret word from the real answer list, no engine help). A game in progress survives a reload. When it ends, **Analiziraj** opens it in the Analiza tab.
+- **Kopiraj poveznicu** (in the Analiza details) creates a link containing the whole game. Opening it asks for confirmation first, because it shows the words. Friends need the word lists loaded to see the analysis.
+
+## Stablo
+
+A study tool with two views. **Karta** (default) is an icicle map: pick an opening word and every colour outcome appears at once as a block whose height is the number of words left. Click a block to branch it, double-click to zoom in, drag to pan and use the wheel to zoom. The side panel shows alternatives, the remaining words and the guaranteed finish, and **Otvori u analizi** copies the path into the Analiza tab. **Lista** is a simpler step-by-step version of the same tree.
 
 ## Notes
 
